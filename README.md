@@ -16,9 +16,9 @@ Image here ->
 
 ## Prerequisities
 
-# Run the project
+## Run the project
 
-# Warehouse schema
+## Warehouse schema
 Source tables:
 
 1. Lists
