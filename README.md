@@ -26,13 +26,13 @@ Source tables:
 ---------------
 DWH:
 
-BestSellerFact
-BooksDim
-AuthorDim
-AgeGroupDim
-PublisherDim
-DateDim
-CategoryDim
+BestSellerFact  
+BooksDim  
+AuthorDim  
+AgeGroupDim  
+PublisherDim  
+DateDim  
+CategoryDim  
 
 
 
