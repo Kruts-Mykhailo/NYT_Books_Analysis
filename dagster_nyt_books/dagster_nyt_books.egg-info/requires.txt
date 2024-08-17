@@ -1,0 +1,9 @@
+dagster
+dagster-cloud
+dagster-dbt
+dbt-duckdb<1.9
+dbt-postgres<1.9
+pandas
+
+[dev]
+dagster-webserver

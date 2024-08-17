@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: dagster_nyt_books
+Version: 0.0.1
+Requires-Dist: dagster
+Requires-Dist: dagster-cloud
+Requires-Dist: dagster-dbt
+Requires-Dist: dbt-duckdb<1.9
+Requires-Dist: dbt-postgres<1.9
+Requires-Dist: pandas
+Provides-Extra: dev
+Requires-Dist: dagster-webserver; extra == "dev"

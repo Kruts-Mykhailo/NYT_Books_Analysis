@@ -1,0 +1,14 @@
+pyproject.toml
+setup.py
+dagster_nyt_books/__init__.py
+dagster_nyt_books/assets.py
+dagster_nyt_books/definitions.py
+dagster_nyt_books/project.py
+dagster_nyt_books/schedules.py
+dagster_nyt_books.egg-info/PKG-INFO
+dagster_nyt_books.egg-info/SOURCES.txt
+dagster_nyt_books.egg-info/dependency_links.txt
+dagster_nyt_books.egg-info/requires.txt
+dagster_nyt_books.egg-info/top_level.txt
+dagster_nyt_books/resources/__init__.py
+dagster_nyt_books/resources/nyt_books_api.py

@@ -1,0 +1,19 @@
+dbt_nyt_books:
+   outputs:
+     dev:
+       type: duckdb
+       path: dev.duckdb
+       threads: 1
+ 
+     prod:
+       type: postgres
+       host: [hostname]
+       user: [username]
+       password: [password]
+       port: [port]
+       dbname: [database name] # or database instead of dbname
+       schema: [dbt schema]  
+       threads: 4
+ 
+   target: dev
+
