@@ -7,13 +7,12 @@ dbt_nyt_books:
  
      prod:
        type: postgres
-       host: [hostname]
-       user: [username]
-       password: [password]
-       port: [port]
-       dbname: [database name] # or database instead of dbname
-       schema: [dbt schema]  
+       host: {{ process.env.PG_HOST }}
+       user: {{ process.env.PG_USERNAME }}
+       password: {{ process.env.PG_PASSWORD }}
+       port: {{ process.env.PG_PORT }}
+       dbname: {{ process.env.PG_DBNAME }}
        threads: 4
  
-   target: dev
+   target: prod
 
