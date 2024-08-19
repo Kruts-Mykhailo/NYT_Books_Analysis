@@ -8,7 +8,7 @@ Pipeline to pull data related to weekly bestseller lists across various categori
 
 Image here ->
 
-1. Extract weekly or monthly from NYT Books API
+1. Extract weekly from NYT Books API
 2. Load data into `Postgresql` data warehouse
 3. Transform data using `dbt`
 4. Orchestrate and pull data using `Dagster`
@@ -25,8 +25,7 @@ Extract data from an api -> load 2 assets to postgresql
 ## Warehouse schema
 Source tables:
 
-1. Lists
-2. Books
+1. Books + Lists
 ---------------
 DWH:
 
@@ -38,33 +37,27 @@ PublisherDim
 DateDim  
 CategoryDim  
 
-Source table lists_published schema:
-
-id INT (generated)
-list_id INT
-list_name STRING
-updated_rate STRING
-published_date DATE
-books_ranked INT
-
 Source table books_published:
 
-id (primary_isbn13): STRING
+id: STRING
 age_group: STRING
 author: STRING
 book_uri: STRING
 contributor: STRING
 contributor_note: STRING
 created_date: DATE
-updated_date: DATE
 description: STRING
+updated_date: DATE
+updated_rate: STRING
 price: INT
 publisher: STRING
+published_date: DATE
+primary_isbn13: STRING
+list_id: INT
+list_name: STRING
 rank: INT
 rank_last_week: INT
 weeks_on_list: INT
-rank_date (same as published_date): DATE
-list_fk_id: INT
 
 
 
