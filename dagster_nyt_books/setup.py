@@ -16,7 +16,11 @@ setup(
         "dbt-duckdb<1.9",
         "dbt-postgres<1.9",
         "pandas",
-        "python-dotenv"
+        "python-dotenv",
+        "black",
+        "mypy",
+        "flake8",
+        "isort",
     ],
     extras_require={
         "dev": [

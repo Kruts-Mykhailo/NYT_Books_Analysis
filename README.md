@@ -16,7 +16,7 @@ Image here ->
 
 # Dagster logic
 
-Extract data from an api -> load 2 assets to postgresql 
+Extract data from an api -> load raw data in postgres
 
 ## Prerequisities
 

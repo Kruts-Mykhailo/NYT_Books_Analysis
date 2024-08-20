@@ -1,22 +1,53 @@
-import psycopg2
-from dagster import EnvVar
-from types import Dict
+from contextlib import contextmanager
+from typing import Iterator
 
-def get_pg_conn_params() -> Dict[str: str]:
-    return {
-        'dbname': EnvVar('PG_DBNAME'),
-        'user': EnvVar('PG_USERNAME'),
-        'password': EnvVar('PG_PASSWORD'),
-        'host': EnvVar('PG_HOST'),
-        'port': EnvVar('PG_PORT')
+from dagster import EnvVar
+from sqlalchemy import Connection, create_engine
+
+
+def get_pg_dsn() -> str:
+    """Generate a DSN string for PostgreSQL connection."""
+
+    required_vars = {
+        "dbname": EnvVar("PG_DBNAME"),
+        "user": EnvVar("PG_USERNAME"),
+        "password": EnvVar("PG_PASSWORD"),
+        "host": EnvVar("PG_HOST"),
+        "port": EnvVar("PG_PORT"),
     }
 
-def get_sql_conn():
-    """Return Postgres connection"""
-    
-    conn = psycopg2.connect(get_pg_conn_params)
+    dsn_params = {}
 
+    for key, env_var in required_vars.items():
+        value = env_var.get_value()
+        if not value:
+            raise EnvironmentError(f"Environment variable {key} is missing or empty.")
+        dsn_params[key] = value
+
+    # Create the DSN string
+    dsn = (
+        f"dbname={dsn_params['dbname']} "
+        f"user={dsn_params['user']} "
+        f"password={dsn_params['password']} "
+        f"host={dsn_params['host']} "
+        f"port={dsn_params['port']}"
+    )
+
+    return dsn
+
+
+@contextmanager
+def get_sql_conn(context) -> Iterator[Connection]:
+    """Return Postgres connection"""
+
+    conn = None
+    engine = create_engine(get_pg_dsn())
     try:
-        return conn
-    except:
-        print("Error connecting to Postgres")
+        conn = engine.connect()
+        yield conn
+    except Exception as e:
+        context.log.error(f"Error connecting to Postgres: {e}")
+        raise
+    finally:
+        if conn:
+            conn.close()
