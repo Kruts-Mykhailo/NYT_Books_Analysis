@@ -2,41 +2,54 @@ from datetime import datetime
 from typing import Any, Dict
 
 import pandas as pd
-from dagster import AssetExecutionContext, asset
+import requests
+from dagster import AssetExecutionContext, asset, AssetIn
 
 from ..resources.api import NYTBooksConnectionResource
 
 BOOKS_FULL_OVERVIEW_FILE = "full-overview.json"
 
 
-@asset(compute_kind="json")
+@asset(compute_kind="json",
+       description="Extracts all bestseller lists of books with full-overview from NYT Books API by current date.")
 def extract_full_overview(
     context: AssetExecutionContext, api_conn: NYTBooksConnectionResource
 ) -> Dict[str, Any]:
     current_date = datetime.strftime(datetime.now(), "%Y-%m-%d")
     context.log.info(f"Fetching bestseller lists for date {current_date}...")
-    response = api_conn.request(endpoint="full-overview", published_date=current_date)
-    context.log.info(f"Response status: {response.status_code}")
-    return response.json()
+    try:
+        response = api_conn.request(endpoint="lists/full-overview", published_date=current_date)
+        context.log.info(f"Response status: {response.status_code}")
+
+        if response.status_code != 200:
+            context.log.error(f"Failed to fetch data: {response.status_code} - {response.text}")
+            response.raise_for_status()  
+
+        return response.json()
+
+    except requests.exceptions.RequestException as e:
+        context.log.error(f"Request failed: {str(e)}")
+        raise
 
 
 @asset(
-    deps=[extract_full_overview],
+    ins={"upstream": AssetIn(key="extract_full_overview")},
     compute_kind="pandas",
     io_manager_key="postgres_io_manager",
+    description="Compute result of GET requst in a DataFrame and ingesting result in a PostgreSQL db."
 )
-def raw_books(full_overview: Dict[str, Any], context: AssetExecutionContext):
+def raw_books(context: AssetExecutionContext, upstream: Dict[str, Any]):
 
     books_published = []
 
-    published_date = full_overview["results"]["published_date"]
+    published_date = upstream["results"]["published_date"]
     published_date_cnvrt = datetime.strptime(published_date, "%Y-%m-%d").strftime(
         "%Y%m%d"
     )
 
     context.log.info(f"Processing {BOOKS_FULL_OVERVIEW_FILE}")
 
-    for books_list in full_overview["results"]["lists"]:
+    for books_list in upstream["results"]["lists"]:
 
         for book in books_list["books"]:
             books_published.append(
@@ -67,3 +80,4 @@ def raw_books(full_overview: Dict[str, Any], context: AssetExecutionContext):
     context.add_output_metadata({"num_rows": len(books_published)})
 
     return pd.DataFrame(books_published)
+

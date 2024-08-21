@@ -12,6 +12,19 @@ services:
       - "${PG_PORT}:5432"  
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "pg_isready",
+          "-d",
+          "${PG_DBNAME}",
+          "-U",
+          "${PG_USERNAME}"
+        ]
+      interval: 5s
+      retries: 5
+    restart: always
 
 volumes:
   postgres_data:

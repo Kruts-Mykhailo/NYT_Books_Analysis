@@ -26,18 +26,18 @@ def get_pg_dsn() -> str:
 
     # Create the DSN string
     dsn = (
-        f"dbname={dsn_params['dbname']} "
-        f"user={dsn_params['user']} "
-        f"password={dsn_params['password']} "
-        f"host={dsn_params['host']} "
-        f"port={dsn_params['port']}"
+        f"postgresql://{dsn_params['user']}:"
+        f"{dsn_params['password']}@"
+        f"{dsn_params['host']}:"
+        f"{dsn_params['port']}/"
+        f"{dsn_params['dbname']}"
     )
 
     return dsn
 
 
 @contextmanager
-def get_sql_conn(context) -> Iterator[Connection]:
+def get_sql_conn(io_context) -> Iterator[Connection]:
     """Return Postgres connection"""
 
     conn = None
@@ -46,7 +46,7 @@ def get_sql_conn(context) -> Iterator[Connection]:
         conn = engine.connect()
         yield conn
     except Exception as e:
-        context.log.error(f"Error connecting to Postgres: {e}")
+        io_context.log.error(f"Error connecting to Postgres: {e}")
         raise
     finally:
         if conn:

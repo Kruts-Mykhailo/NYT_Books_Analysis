@@ -6,7 +6,7 @@ from ..resources.db_conn import get_sql_conn  # type: ignore
 
 class PostgresDataframeIOManager(IOManager):
     def __init__(self) -> None:
-        self.name = EnvVar("PG_DBNAME")
+        self.name = EnvVar("PG_DBNAME").get_value()
 
     def handle_output(self, context: OutputContext, obj: pd.DataFrame):
 
