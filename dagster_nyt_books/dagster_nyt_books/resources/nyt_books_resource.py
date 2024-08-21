@@ -1,11 +1,7 @@
 import requests
 from dagster import ConfigurableResource, EnvVar
 from requests import Response
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-
-# load_dotenv()
 
 class NYTBooksConnectionResource(ConfigurableResource):
 

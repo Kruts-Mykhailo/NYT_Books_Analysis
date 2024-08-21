@@ -1,7 +1,7 @@
 import pandas as pd
 from dagster import EnvVar, InputContext, IOManager, OutputContext, io_manager
 
-from ..resources.db_conn import get_sql_conn  # type: ignore
+from .db_conn import get_sql_conn  # type: ignore
 
 
 class PostgresDataframeIOManager(IOManager):
@@ -36,6 +36,6 @@ class PostgresDataframeIOManager(IOManager):
         return df
 
 
-@io_manager
+@io_manager(description="Custom I/O manager for Postgres.")
 def postgres_io_manager(_):
     return PostgresDataframeIOManager()
