@@ -1,11 +1,6 @@
 dbt_nyt_books:
    outputs:
      dev:
-       type: duckdb
-       path: dev.duckdb
-       threads: 1
- 
-     prod:
        type: postgres
        host: "{{ env_var('PG_HOST') }}" 
        user: "{{ env_var('PG_USERNAME') }}"
@@ -15,5 +10,5 @@ dbt_nyt_books:
        schema: public
        threads: 4
  
-   target: prod
+   target: dev
 
