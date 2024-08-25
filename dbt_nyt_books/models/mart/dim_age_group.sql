@@ -1,10 +1,5 @@
-
 with age_groups as (
-    select
-        distinct age_group,
-        case
-            when age_group = ''
-    from {{ ref('stg_books') }}
+    select distinct age_group from {{ ref('stg_books') }}
 ), 
 transformed_groups as (
     select 
@@ -27,8 +22,9 @@ transformed_groups as (
     from age_groups
 )
 select
-    md5(age_group) as age_group_id,
+    {{ dbt_utils.md5('age_group') }} as age_group_id,
     age_group,
     from_age,
     to_age
 from transformed_groups
+

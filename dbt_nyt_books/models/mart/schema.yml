@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: dim_publisher
+  - name: dim_list
+  - name: dim_date
+  - name: dim_age_group
+  - name: fc_publish_event

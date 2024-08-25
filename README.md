@@ -16,49 +16,15 @@ Image here ->
 
 # Dagster logic
 
-Extract data from an api -> load raw data in postgres
+Extract data from an api -> load and increment raw data in postgres table
+
+# dbt pipeline logic
+
+Raw data is a full history table of all records. Staging table is a table of only newly added records. After initial load of the records into a staging table, data warehouse tables are updated.
 
 ## Prerequisities
 
 ## Run the project
-
-## Warehouse schema
-Source tables:
-
-1. Books + Lists
----------------
-DWH:
-
-BestSellerFact  
-BooksDim  
-AuthorDim  
-AgeGroupDim  
-PublisherDim  
-DateDim  
-CategoryDim  
-
-Source table books_published:
-
-id: STRING
-age_group: STRING
-author: STRING
-book_uri: STRING
-contributor: STRING
-contributor_note: STRING
-created_date: DATE
-description: STRING
-updated_date: DATE
-updated_rate: STRING
-price: INT
-publisher: STRING
-published_date: DATE
-primary_isbn13: STRING
-list_id: INT
-list_name: STRING
-rank: INT
-rank_last_week: INT
-weeks_on_list: INT
-
 
 
 
