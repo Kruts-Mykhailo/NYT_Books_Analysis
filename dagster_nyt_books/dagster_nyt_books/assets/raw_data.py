@@ -21,7 +21,7 @@ BOOKS_FULL_OVERVIEW_FILE = "full-overview.json"
 def extract_full_overview(
     context: AssetExecutionContext, api_conn: NYTBooksConnectionResource
 ) -> Dict[str, Any]:
-    current_date = datetime.strftime(datetime.now(), "%Y-%m-%d")
+    current_date = datetime.strftime(datetime.now() - timedelta(days=0), "%Y-%m-%d")
     context.log.info(f"Fetching bestseller lists for date {current_date}...")
     try:
         response = api_conn.request(
@@ -64,7 +64,6 @@ def raw_books(context: AssetExecutionContext, upstream: Dict[str, Any]):
         for book in books_list["books"]:
             books_published.append(
                 {
-                    "id": published_date_cnvrt + book["primary_isbn13"],
                     "age_group": book["age_group"],
                     "author": book["author"],
                     "book_uri": book["book_uri"],
@@ -98,7 +97,7 @@ def check_data_existance_by_date(context: AssetCheckExecutionContext):
     """Checks if the closest published date to the fetch date is present in the database"""
     check_passed = True
 
-    fetch_date = datetime.now()
+    fetch_date = datetime.now() - timedelta(days=0)
     start_date = datetime.strftime(fetch_date, "%Y-%m-%d")
     end_date = datetime.strftime(fetch_date + timedelta(days=7), "%Y-%m-%d")
     check_records_exist_query = """

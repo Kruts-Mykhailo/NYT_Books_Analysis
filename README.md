@@ -22,9 +22,8 @@ Extract data from an api -> load and increment raw data in postgres table
 
 Raw data is a full history table of all records. Staging table is a table of only newly added records. After initial load of the records into a staging table, data warehouse tables are updated.
 
-## Prerequisities
 
-## Run the project
+Current problem: staging table not updating
 
 
 

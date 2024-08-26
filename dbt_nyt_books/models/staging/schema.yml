@@ -3,11 +3,6 @@ version: 2
 models:
   - name: stg_books
     columns:
-      - name: id
+      - name: primary_isbn13
         tests:
-          - unique
-          - not_null
-      - name: primar_isbn_13
-        tests:
-          - unique
           - not_null

@@ -1,10 +1,12 @@
+{{
+    config(
+        incremental_key='published_date'
+    )
+}}
 with source as (
-
     select * from {{ source('dbt_nyt_books', 'raw_books') }}
-
-),
+)
 select
-    cast(id as int) as id,
     age_group,
     author,
     book_uri,
@@ -13,12 +15,12 @@ select
     cast(created_date as date) as created_date,
     description,
     cast(updated_date as date) as updated_date,
-    cast(updated_rate as date) as update_rate,
+    updated_rate as update_rate,
     cast(price as float) as price,
     publisher,
     cast(published_date as date) as published_date,
-    cast(primary_isbn10 as int) as primary_isbn10,
-    cast(primary_isbn13 as int) as primary_isbn13,
+    primary_isbn10 as primary_isbn10,
+    primary_isbn13 as primary_isbn13,
     cast(list_id as int),
     list_name,
     cast(rank as int) as rank,

@@ -2,6 +2,8 @@ version: 2
 
 sources:
   - name: dbt_nyt_books
+    database: nyt
+    schema: public
     tables:
       - name: raw_books
         meta:

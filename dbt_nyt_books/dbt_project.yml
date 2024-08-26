@@ -20,4 +20,8 @@ models:
       mart:
         materialized: incremental
       staging:
-        materialized: view
+        materialized: table
+
+vars:
+  'dbt_date:time_zone': 'Europe/London'
+

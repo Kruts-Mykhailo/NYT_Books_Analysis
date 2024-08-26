@@ -4,7 +4,6 @@
     )
 }}
 
-
 select 
     list_id, 
     list_name

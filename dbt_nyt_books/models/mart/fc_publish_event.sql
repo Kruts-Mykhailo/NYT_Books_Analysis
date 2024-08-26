@@ -1,11 +1,12 @@
 
 select
-    current_timestamp() as load_timestamp,
-    sb.primary_isbn13 as book_id,
-    sb.published_date,
-    {{ dbt_utils.md5('age_group') }} as age_group_id,
-    {{ dbt_utils.md5('publisher') }} as publisher_id,
-    {{ dbt_utils.md5('author') }} as author_id,
+    md5(concat(primary_isbn13, list_id, published_date)) as event_id,
+    {{ dbt_date.now() }} as load_timestamp,
+    primary_isbn13 as book_id,
+    published_date,
+    md5(age_group) as age_group_id,
+    md5(publisher) as publisher_id,
+    md5(author) as author_id,
     list_id,
     case 
         when rank > rank_last_week then 1 else 0
