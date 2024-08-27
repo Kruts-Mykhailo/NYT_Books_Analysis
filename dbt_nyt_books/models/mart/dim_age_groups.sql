@@ -1,3 +1,10 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='age_group_id',
+        incremental_strategy='merge'
+    )
+}}
 with age_groups as (
     select distinct age_group from {{ ref('stg_books') }}
 ), 

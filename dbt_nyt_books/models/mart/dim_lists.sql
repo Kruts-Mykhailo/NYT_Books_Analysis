@@ -1,11 +1,12 @@
 {{
     config(
-        unique_key='list_id'
+        materialized='incremental',
+        unique_key='list_id',
+        incremental_strategy='merge'
     )
 }}
 
 select 
-    list_id, 
+    distinct list_id, 
     list_name
-from {{ source('dbt_nyt_books', 'raw_books') }}
-group by list_id, list_name
+from {{ ref('stg_books')}}

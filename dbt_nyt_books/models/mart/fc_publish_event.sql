@@ -1,8 +1,13 @@
-
+{{
+    config(
+        unique_key='event_id',
+        cluster_by=['published_date']
+    )
+}}
 select
     md5(concat(primary_isbn13, list_id, published_date)) as event_id,
     {{ dbt_date.now() }} as load_timestamp,
-    primary_isbn13 as book_id,
+    md5(concat(primary_isbn13, list_id)) as book_id,
     published_date,
     md5(age_group) as age_group_id,
     md5(publisher) as publisher_id,

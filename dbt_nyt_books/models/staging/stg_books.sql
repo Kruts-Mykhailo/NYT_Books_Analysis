@@ -1,8 +1,3 @@
-{{
-    config(
-        incremental_key='published_date'
-    )
-}}
 with source as (
     select * from {{ source('dbt_nyt_books', 'raw_books') }}
 )
@@ -27,4 +22,9 @@ select
     cast(rank_last_week as int) as rank_last_week,
     cast(weeks_on_list as int) as weeks_on_list
 from source
-where published_date >= (select max(published_date) from {{ this }})
+
+{% if is_incremental() %}
+
+where published_date > (select max(published_date) from {{ this }})
+
+{% endif %}

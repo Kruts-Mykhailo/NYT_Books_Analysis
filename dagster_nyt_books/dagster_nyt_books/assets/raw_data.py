@@ -11,7 +11,7 @@ from ..resources.db_conn import get_sql_conn
 from ..resources.nyt_books_resource import NYTBooksConnectionResource
 
 BOOKS_FULL_OVERVIEW_FILE = "full-overview.json"
-
+DAYS_BEFORE = 0
 
 @asset(
     compute_kind="json",
@@ -21,7 +21,7 @@ BOOKS_FULL_OVERVIEW_FILE = "full-overview.json"
 def extract_full_overview(
     context: AssetExecutionContext, api_conn: NYTBooksConnectionResource
 ) -> Dict[str, Any]:
-    current_date = datetime.strftime(datetime.now() - timedelta(days=0), "%Y-%m-%d")
+    current_date = datetime.strftime(datetime.now() - timedelta(days=DAYS_BEFORE), "%Y-%m-%d")
     context.log.info(f"Fetching bestseller lists for date {current_date}...")
     try:
         response = api_conn.request(
@@ -53,9 +53,6 @@ def raw_books(context: AssetExecutionContext, upstream: Dict[str, Any]):
     books_published = []
 
     published_date = upstream["results"]["published_date"]
-    published_date_cnvrt = datetime.strptime(published_date, "%Y-%m-%d").strftime(
-        "%Y%m%d"
-    )
 
     context.log.info(f"Processing {BOOKS_FULL_OVERVIEW_FILE}")
 
@@ -97,7 +94,7 @@ def check_data_existance_by_date(context: AssetCheckExecutionContext):
     """Checks if the closest published date to the fetch date is present in the database"""
     check_passed = True
 
-    fetch_date = datetime.now() - timedelta(days=0)
+    fetch_date = datetime.now() - timedelta(days=DAYS_BEFORE)
     start_date = datetime.strftime(fetch_date, "%Y-%m-%d")
     end_date = datetime.strftime(fetch_date + timedelta(days=7), "%Y-%m-%d")
     check_records_exist_query = """
