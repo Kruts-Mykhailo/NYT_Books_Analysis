@@ -10,10 +10,10 @@ Project is aimed to gather potential insights in evolution of bestseller books a
 
 ![Pipeline architecture](./assets/images/NYT_diagram.drawio.png)
 
-1. Extract weekly from NYT Books `API`
-2. Load data into `Postgresql` data warehouse
-3. Transform data using `dbt`
-4. Orchestrate and pull data using `Dagster` and `Python`
+1. Orchestrate and pull data using `Dagster` and `Python`
+2. Extract weekly from NYT Books `API`
+3. Load data into `Postgresql` data warehouse
+4. Transform data using `dbt`
 5. Visualize data using `Metabase` 
 
 ## API description
