@@ -28,7 +28,7 @@ I chose to pull a full overview of lists with full ranking. Therefore we can tak
 
 Request: GET /lists/full-overview.json
 
-## Pre-requisities
+## Pre-requisites
 
 1. git
 2. Python >= 3.12.
