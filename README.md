@@ -1,9 +1,20 @@
 # Project: New York Times best seller books warehouse/analytics
 
+![Image](https://developer.nytimes.com/files/thumb_books_july-2020.jpg?v=1595646805537)
+
 ## Overview
 Main objective is to practice and showcase my data engineering skills by using modern tools.  
 Project is aimed to gather potential insights in evolution of bestseller books across time. Pipeline pulls data on weekly basis.
 
+## Architecture
+
+![Pipeline architecture](./assets/images/NYT_diagram.drawio.png)
+
+1. Extract weekly from NYT Books `API`
+2. Load data into `Postgresql` data warehouse
+3. Transform data using `dbt`
+4. Orchestrate and pull data using `Dagster` and `Python`
+5. Visualize data using `Tableau` 
 
 ## API description
 The API gives us the ability to load these lists with their corresponding metadata. Books API has many different endpoints, each proposing a different value (e.g. lists with top 5 books, looking up 1 or more books based on time or/and metadata parameters). 
@@ -17,16 +28,6 @@ I chose to pull a full overview of lists with full ranking. Therefore we can tak
 
 Request: GET /lists/full-overview.json
 
-## Architecture
-
-![Pipeline architecture](./assets/images/NYT_diagram.drawio.png)
-
-1. Extract weekly from NYT Books API
-2. Load data into `Postgresql` data warehouse
-3. Transform data using `dbt`
-4. Orchestrate and pull data using `Dagster` and `Python`
-5. Visualize data using `Tableau` 
-
 ## Pre-requisities
 
 1. git
@@ -35,7 +36,7 @@ Request: GET /lists/full-overview.json
 4. Postgresql
 5. NYT Developers API key
 
-## Installation
+## Installation and run
 
 1. Request an API key  
 Open this link: [https://developer.nytimes.com/get-started](https://developer.nytimes.com/get-started). Follow the instructions and select the Books API when generating the API key. 
