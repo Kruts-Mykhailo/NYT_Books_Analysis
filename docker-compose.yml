@@ -25,7 +25,17 @@ services:
       interval: 5s
       retries: 5
     restart: always
+  metabase:
+    image: ${METABASE_IMAGE}:latest
+    container_name: metabase
+    ports:
+      - "4000:3000"  # Map port 4000 on the host to port 3000 in the container
+    environment:
+      MB_DB_FILE: /metabase-data/metabase.db
+    volumes:
+      - ./metabase-data:/metabase-data  # Persist Metabase data
 
 volumes:
   postgres_data:
     driver: local
+  metabase_data:
