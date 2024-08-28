@@ -19,12 +19,12 @@ Project is aimed to gather potential insights in evolution of bestseller books a
 ## API description
 The API gives us the ability to load these lists with their corresponding metadata. Books API has many different endpoints, each proposing a different value (e.g. lists with top 5 books, looking up 1 or more books based on time or/and metadata parameters). 
 
-Every 7 days, on Sunday, NYT composes a lists of best seller books. Each list consists of bestseller books rated from 1 - 15.
+Every 7 days, on Sunday, NYT composes a lists of best seller books. Each list consists of bestseller books rated from 1 - 15.  
 Lists have 2 rates of updates:
 * Weekly 
 * Monthly 
 
-I chose to pull a full overview of lists with full ranking. Therefore we can take a full look onto what books and for how long they reamained on a list in a particular period of time.
+I chose to pull a full overview of lists with full ranking. Therefore we can take a full look into what books and for how long they reamained on a list in a particular period of time.
 
 Request: GET /lists/full-overview.json
 
@@ -33,7 +33,7 @@ Request: GET /lists/full-overview.json
 1. git
 2. Python >= 3.12.
 3. Docker and Docker Compose
-4. Postgresql
+4. PostgreSQL >= 15
 5. NYT Developers API key
 
 ## Installation
