@@ -78,7 +78,7 @@ pip install -r requirments.txt
 cd ./dagster_nyt_books
 dagster dev
 ```
-## Run the project
+## Use the project
 Open dagster UI to check, schedule or run the job:
 
 ```
@@ -93,10 +93,9 @@ localhost:4000
 
 ## Future work
 
-- Scheduling
 - Testing
-- CI/CD
 - Deployment
+- CI/CD
 
 
 
