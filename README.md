@@ -93,9 +93,10 @@ localhost:4000
 
 ## Future work
 
-- Testing
-- Deployment
-- CI/CD
+- Build a Docker image for the dagster + dbt
+- CI for github
+- Infrastructure deployment on Azure using terraform: Postgres db + Powerbi viz tool. Use Virtual Network and isolate the connection
+- CD on Azure. Deploy the dagster application I guess on app services and then make sure it is connected to db.
 
 
 
