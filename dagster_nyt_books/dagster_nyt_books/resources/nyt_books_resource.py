@@ -9,5 +9,6 @@ class NYTBooksConnectionResource(ConfigurableResource):
         params = {"api-key": EnvVar("NYT_API_KEY").get_value()}
         kwargs.update(params)
         return requests.get(
-            f"https://api.nytimes.com/svc/books/v3/{endpoint}.json", params=kwargs
+            f"https://api.nytimes.com/svc/books/v3/{endpoint}.json",
+            params=kwargs
         )

@@ -1,4 +1,8 @@
-from dagster import AssetSelection, Definitions, DefaultScheduleStatus, define_asset_job, ScheduleDefinition
+from dagster import (AssetSelection,
+                     Definitions,
+                     DefaultScheduleStatus,
+                     define_asset_job,
+                     ScheduleDefinition)
 from dagster_dbt import DbtCliResource
 
 from dagster_nyt_books.assets.dbt import dbt_nyt_books_dbt_assets

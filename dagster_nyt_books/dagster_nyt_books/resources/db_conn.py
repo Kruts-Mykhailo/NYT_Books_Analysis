@@ -21,7 +21,9 @@ def get_pg_dsn() -> str:
     for key, env_var in required_vars.items():
         value = env_var.get_value()
         if not value:
-            raise EnvironmentError(f"Environment variable {key} is missing or empty.")
+            raise EnvironmentError(
+                f"Environment variable {key} is missing or empty."
+                )
         dsn_params[key] = value
 
     # Create the DSN string

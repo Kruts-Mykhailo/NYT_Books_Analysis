@@ -97,6 +97,8 @@ localhost:4000
 - Infrastructure deployment on Azure using terraform: Postgres db + Powerbi viz tool. Use Virtual Network and isolate the connection
 - CD on Azure. Deploy the dagster application I guess on app services and then make sure it is connected to db.
 
+--UPDATE TEST
+
 
 
 
