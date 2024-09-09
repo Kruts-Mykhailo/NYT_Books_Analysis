@@ -41,7 +41,9 @@ def get_sql_conn(io_context) -> Iterator[Connection]:
     """Return Postgres connection"""
 
     conn = None
+    io_context.log.info(get_pg_dsn())
     engine = create_engine(get_pg_dsn())
+    
     try:
         conn = engine.connect()
         yield conn

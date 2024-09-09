@@ -27,7 +27,6 @@ dagster-graphql==1.8.1
 dagster-pipes==1.8.1
 dagster-postgres==0.24.1
 dagster-webserver==1.8.1
--e git+https://github.com/Kruts-Mykhailo/NYT_Books_Analysis.git@3c6fed8bf742f4b1bee4a3773dd19a95929da6c7#egg=dagster_nyt_books&subdirectory=dagster_nyt_books
 dbt-adapters==1.4.1
 dbt-common==1.7.0
 dbt-core==1.8.5
