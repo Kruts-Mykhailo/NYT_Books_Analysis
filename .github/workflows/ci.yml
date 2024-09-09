@@ -34,7 +34,9 @@ jobs:
 
       - name: Run type checking
         working-directory: dagster_nyt_books
-        run: mypy .
+        run: | 
+          mypy --install-types 
+          mypy .
 
       - name: Run linting
         working-directory: dagster_nyt_books
