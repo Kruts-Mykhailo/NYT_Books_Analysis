@@ -21,6 +21,7 @@ setup(
         "mypy",
         "flake8",
         "isort",
+        "pandas-stubs"
     ],
     extras_require={
         "dev": [

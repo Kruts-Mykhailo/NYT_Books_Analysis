@@ -22,7 +22,7 @@ jobs:
         working-directory: dagster_nyt_books
         run: |
           python -m pip install --upgrade pip
-          pip install -e .
+          pip install -e . -q
 
       - name: Run isort
         working-directory: dagster_nyt_books
