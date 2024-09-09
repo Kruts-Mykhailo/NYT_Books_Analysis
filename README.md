@@ -51,7 +51,7 @@ METABASE_IMAGE=stephaneturquay/metabase-arm64
 #METABASE_IMAGE=metabase/metabase
 
 PG_USERNAME=postgres
-PG_HOST=localhost
+PG_HOST=postgres_db
 PG_PASSWORD=password
 PG_PORT=5432
 PG_DBNAME=nyt
@@ -70,13 +70,13 @@ docker compose up -d
 ```
 python3 venv -m myenv
 source ./myenv/bin/activate
-pip install -r requirments.txt
+cd /dagster_nyt_books
+pip install .
 ```
 
-5. Run Dagster
+5. Spin up the containers
 ```
-cd ./dagster_nyt_books
-dagster dev
+docker compse up -d
 ```
 ## Use the project
 Open dagster UI to check, schedule or run the job:
@@ -93,11 +93,9 @@ localhost:4000
 
 ## Future work
 
-- CI for github
 - Infrastructure deployment on Azure using terraform: Postgres db + Powerbi viz tool. Use Virtual Network and isolate the connection
 - CD on Azure. Deploy the dagster application I guess on app services and then make sure it is connected to db.
 
---UPDATE TEST
 
 
 
