@@ -1,8 +1,9 @@
 .env
 myenv/
 venv/
-dagster_nyt_books/__pycache__/
-dagster_nyt_books/assets/__pycache__/
-dagster_nyt_books/resources/__pycache__/
+dagster_nyt_books/dagster_nyt_books/__pycache__/
+dagster_nyt_books/dagster_nyt_books/assets/__pycache__/
+dagster_nyt_books/dagster_nyt_books/resources/__pycache__/
+dagster_nyt_books/dagster_nyt_books/__pycache__/
 metabase-data/
 infra/.terraform/providers

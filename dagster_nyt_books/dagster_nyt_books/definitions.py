@@ -5,12 +5,12 @@ from dagster import (AssetSelection,
                      ScheduleDefinition)
 from dagster_dbt import DbtCliResource
 
-from .assets.dbt import dbt_nyt_books_dbt_assets
-from .assets.raw_data import (check_data_existance_by_date,
+from dagster_nyt_books.assets.dbt import dbt_nyt_books_dbt_assets
+from dagster_nyt_books.assets.raw_data import (check_data_existance_by_date,
                               extract_full_overview, raw_books)
-from .project import dbt_nyt_books_project
-from .resources.nyt_books_resource import NYTBooksConnectionResource
-from .resources.pg_io_manager import PostgresDataframeIOManager
+from dagster_nyt_books.project import dbt_nyt_books_project
+from dagster_nyt_books.resources.nyt_books_resource import NYTBooksConnectionResource
+from dagster_nyt_books.resources.pg_io_manager import PostgresDataframeIOManager
 
 nyt_books_pipeline_job = define_asset_job(
     "process_nyt_books",

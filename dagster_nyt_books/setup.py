@@ -12,19 +12,16 @@ setup(
     install_requires=[
         "dagster",
         "dagster-cloud",
+        "dagster-webserver",
         "dagster-dbt",
-        "dbt-duckdb<1.9",
-        "dbt-postgres<1.9",
+        "dagster-postgres",
+        "dbt-duckdb",
+        "dbt-postgres",
         "pandas",
         "python-dotenv",
         "black",
         "mypy",
         "flake8",
-        "isort"
-    ],
-    extras_require={
-        "dev": [
-            "dagster-webserver",
-        ]
-    },
+        "isort",
+    ]
 )

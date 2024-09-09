@@ -1,0 +1,4 @@
+load_from:
+  - python_file:
+      relative_path: definitions.py
+      working_directory: /dagster_nyt_books
