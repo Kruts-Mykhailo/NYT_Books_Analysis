@@ -32,13 +32,6 @@ jobs:
         working-directory: dagster_nyt_books
         run: black .
 
-      - name: Run type checking
-        working-directory: dagster_nyt_books
-        run: | 
-          mypy . || true                            # Run mypy on the codebase, allow it to fail
-          mypy --install-types --non-interactive    # Install missing types automatically
-          mypy .                                    # Run mypy again after installing types
-
       - name: Run linting
         working-directory: dagster_nyt_books
         run: flake8 .

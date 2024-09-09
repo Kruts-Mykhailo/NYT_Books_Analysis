@@ -7,5 +7,10 @@ Requires-Dist: dagster-dbt
 Requires-Dist: dbt-duckdb<1.9
 Requires-Dist: dbt-postgres<1.9
 Requires-Dist: pandas
+Requires-Dist: python-dotenv
+Requires-Dist: black
+Requires-Dist: mypy
+Requires-Dist: flake8
+Requires-Dist: isort
 Provides-Extra: dev
 Requires-Dist: dagster-webserver; extra == "dev"

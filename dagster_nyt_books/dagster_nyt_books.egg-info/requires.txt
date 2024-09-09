@@ -4,6 +4,11 @@ dagster-dbt
 dbt-duckdb<1.9
 dbt-postgres<1.9
 pandas
+python-dotenv
+black
+mypy
+flake8
+isort
 
 [dev]
 dagster-webserver

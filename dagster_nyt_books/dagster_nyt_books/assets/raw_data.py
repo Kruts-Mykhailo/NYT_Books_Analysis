@@ -13,6 +13,7 @@ from ..resources.nyt_books_resource import NYTBooksConnectionResource
 BOOKS_FULL_OVERVIEW_FILE = "full-overview.json"
 DAYS_BEFORE = 0
 
+
 @asset(
     compute_kind="json",
     description="""Extracts all bestseller lists of books
@@ -21,7 +22,8 @@ DAYS_BEFORE = 0
 def extract_full_overview(
     context: AssetExecutionContext, api_conn: NYTBooksConnectionResource
 ) -> Dict[str, Any]:
-    current_date = datetime.strftime(datetime.now() - timedelta(days=DAYS_BEFORE), "%Y-%m-%d")
+    current_time = datetime.now() - timedelta(days=DAYS_BEFORE)
+    current_date = datetime.strftime(current_time, "%Y-%m-%d")
     context.log.info(f"Fetching bestseller lists for date {current_date}...")
     try:
         response = api_conn.request(
@@ -31,7 +33,8 @@ def extract_full_overview(
 
         if response.status_code != 200:
             context.log.error(
-                f"Failed to fetch data: {response.status_code} - {response.text}"
+                f"""Failed to fetch data:
+                {response.status_code} - {response.text}"""
             )
             response.raise_for_status()
 
@@ -46,7 +49,8 @@ def extract_full_overview(
     ins={"upstream": AssetIn(key="extract_full_overview")},
     compute_kind="pandas",
     io_manager_key="postgres_io_manager",
-    description="Compute result of GET requst in a DataFrame and ingesting result in a PostgreSQL db.",
+    description="""Compute result of GET requst in a DataFrame
+    and ingesting result in a PostgreSQL db.""",
 )
 def raw_books(context: AssetExecutionContext, upstream: Dict[str, Any]):
 
@@ -91,7 +95,8 @@ def raw_books(context: AssetExecutionContext, upstream: Dict[str, Any]):
 
 @asset_check(asset=extract_full_overview, blocking=True)
 def check_data_existance_by_date(context: AssetCheckExecutionContext):
-    """Checks if the closest published date to the fetch date is present in the database"""
+    """Checks if the closest published date
+    to the fetch date is present in the database"""
     check_passed = True
 
     fetch_date = datetime.now() - timedelta(days=DAYS_BEFORE)
@@ -117,7 +122,8 @@ def check_data_existance_by_date(context: AssetCheckExecutionContext):
 
             if not table_exists:
                 context.log.info(
-                    "The 'raw_books' table does not exist. Skipping record existence check."
+                    """The 'raw_books' table does not exist.
+                    Skipping record existence check."""
                 )
             else:
                 records_exist = conn.execute(
@@ -127,11 +133,13 @@ def check_data_existance_by_date(context: AssetCheckExecutionContext):
 
                 if not records_exist:
                     context.log.info(
-                        f"Records for published date closest to {start_date} do not exist. Proceeding."
+                        f"""Records for published date closest
+                        to {start_date} do not exist. Proceeding."""
                     )
                 else:
                     context.log.error(
-                        f"Records for published date closest to {start_date} already exist in database."
+                        f"""Records for published date closest
+                        to {start_date} already exist in database."""
                     )
                     check_passed = False
 
