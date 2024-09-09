@@ -20,8 +20,7 @@ setup(
         "black",
         "mypy",
         "flake8",
-        "isort",
-        "pandas-stubs"
+        "isort"
     ],
     extras_require={
         "dev": [
